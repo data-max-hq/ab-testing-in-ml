@@ -24,5 +24,10 @@ helm upgrade --install ambassador datawire/ambassador \
   --set image.repository=docker.io/datawire/ambassador \
   --set enableAES=false \
   --set crds.keep=false \
+  --set service.type=ClusterIP \
   --create-namespace \
   --namespace ambassador
+
+kubectl port-forward svc/ambassador -n ambassador 8877:80
+
+http://localhost:8877/ambassador/v0/diag/
