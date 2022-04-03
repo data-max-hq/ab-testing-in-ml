@@ -4,6 +4,13 @@ minikube start --memory 10000 --cpus 4 \
 --driver=docker --kubernetes-version=v1.21.6 \
 --mount
 
+# Install ambassador inside ambassador namesace
+helm repo add datawire https://www.getambassador.io
+helm upgrade --install ambassador datawire/ambassador \
+  --set image.repository=docker.io/datawire/ambassador \
+  --values values.ambassador.local.yaml \
+  --create-namespace \
+  --namespace ambassador
 
 kubectl create namespace seldon-system
 
@@ -18,16 +25,10 @@ helm install seldon-core-analytics seldon-core-analytics \
    --repo https://storage.googleapis.com/seldon-charts \
    --namespace seldon-system
 
-# Install ambassador inside ambassador namesace
-helm repo add datawire https://www.getambassador.io
-helm upgrade --install ambassador datawire/ambassador \
-  --set image.repository=docker.io/datawire/ambassador \
-  --set enableAES=false \
-  --set crds.keep=false \
-  --set service.type=ClusterIP \
-  --create-namespace \
-  --namespace ambassador
-
-kubectl port-forward svc/ambassador -n ambassador 8877:80
+kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
 
 http://localhost:8877/ambassador/v0/diag/
+
+kubectl create namespace seldon
+
+helm install myabtest ./abtest

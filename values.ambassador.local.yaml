@@ -1,0 +1,9 @@
+service:
+  type: ClusterIP
+
+replicaCount: 1
+
+crds:
+  keep: false
+
+enableAES: false
