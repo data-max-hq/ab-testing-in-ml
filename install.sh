@@ -14,7 +14,7 @@ helm upgrade --install ambassador datawire/ambassador \
 
 helm upgrade --install seldon-core seldon-core-operator \
     --repo https://storage.googleapis.com/seldon-charts \
-    --set usageMetrics.enabled=true \
+    --set usageMetrics.enabled=false \
     --set ambassador.enabled=true \
     --create-namespace \
     --namespace seldon-system
@@ -29,3 +29,10 @@ kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
 http://localhost:8877/ambassador/v0/diag/
 
 helm upgrade --install abtest ./abtest --create-namespace --namespace seldon
+
+
+kubectl port-forward svc/ambassador -n ambassador 8080:80
+
+curl -X http://localhost:8080/seldon/myabtest/api/v1.0/predictions
+
+curl -v http://localhost:8080/seldon/myabtest/api/v1.0/predictions -d '{"data":{"names":["a","b"],"tensor":{"shape":[2,2],"values":[0,0,1,1]}}}' -H "Content-Type: application/json"

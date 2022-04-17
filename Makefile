@@ -22,7 +22,7 @@ admin:
 seldon:
 	helm upgrade --install seldon-core seldon-core-operator \
     	--repo https://storage.googleapis.com/seldon-charts \
-		--set usageMetrics.enabled=true \
+		--set usageMetrics.enabled=false \
 		--set ambassador.enabled=true \
 		--create-namespace \
 		--namespace seldon-system
