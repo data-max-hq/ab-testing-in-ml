@@ -28,4 +28,4 @@ kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
 
 http://localhost:8877/ambassador/v0/diag/
 
-helm upgrade --install myabtest ./abtest --create-namespace --namespace seldon
+helm upgrade --install abtest ./abtest --create-namespace --namespace seldon

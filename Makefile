@@ -34,4 +34,4 @@ seldon-analytics:
        --namespace seldon-system
 
 abtest:
-	helm upgrade --install myabtest ./abtest --create-namespace --namespace seldon
+	helm upgrade --install abtest ./abtest --create-namespace --namespace seldon
