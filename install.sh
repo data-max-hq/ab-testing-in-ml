@@ -12,8 +12,6 @@ helm upgrade --install ambassador datawire/ambassador \
   --create-namespace \
   --namespace ambassador
 
-kubectl create namespace seldon-system
-
 helm upgrade --install seldon-core seldon-core-operator \
     --repo https://storage.googleapis.com/seldon-charts \
     --set usageMetrics.enabled=true \
@@ -21,14 +19,13 @@ helm upgrade --install seldon-core seldon-core-operator \
     --create-namespace \
     --namespace seldon-system
 
-helm install seldon-core-analytics seldon-core-analytics \
+helm upgrade --install seldon-core-analytics seldon-core-analytics \
    --repo https://storage.googleapis.com/seldon-charts \
+   --create-namespace \
    --namespace seldon-system
 
 kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
 
 http://localhost:8877/ambassador/v0/diag/
 
-kubectl create namespace seldon
-
-helm install myabtest ./abtest
+helm upgrade --install myabtest ./abtest --create-namespace --namespace seldon
