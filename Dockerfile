@@ -3,13 +3,13 @@ WORKDIR /app
 
 # Install python packages
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt && python -m spacy download en_core_web_sm
 
 COPY ./models/lr.model /models/lr.model
 COPY ./models/tfidf_vectorizer.model /models/tfidf_vectorizer.model
 
 # Copy source code
-COPY . .
+COPY ./app .
 
 # Port for GRPC
 EXPOSE 5000
@@ -17,7 +17,7 @@ EXPOSE 5000
 EXPOSE 9000
 
 # Define environment variables
-ENV MODEL_NAME ABTest
+ENV MODEL_NAME RedditClassifier
 ENV SERVICE_TYPE MODEL
 
 # Changing folder to default user

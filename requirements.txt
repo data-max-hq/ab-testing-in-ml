@@ -1,6 +1,8 @@
 scikit-learn
 seldon-core
 spacy
+scipy==1.7.3
+pickle
 dill
 pandas
 werkzeug==2.0.3
