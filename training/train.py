@@ -1,18 +1,14 @@
-import os
-import sys
 import logging
 
 import dill
-import numpy as np
 import pandas as pd
 
 # This import may take a while as it will download the Spacy ENGLISH model
-from app.ml_utils import CleanTextTransformer, SpacyTokenTransformer
+from training.ml_utils import CleanTextTransformer, SpacyTokenTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
-from seldon_core.seldon_client import SeldonClient
 # Source: https://github.com/SeldonIO/seldon-core/tree/master/examples/models/sklearn_spacy_text
 
 logging.basicConfig(
@@ -78,9 +74,9 @@ lr.fit(x_train_tfidf, y_train)
 
 # These are the models we'll deploy
 logging.info("Dump models.")
-with open("tfidf_vectorizer.model", "wb") as model_file:
+with open("../models/tfidf_vectorizer.model", "wb") as model_file:
     dill.dump(tfidf_vectorizer, model_file)
-with open("lr.model", "wb") as model_file:
+with open("../models/lr.model", "wb") as model_file:
     dill.dump(lr, model_file)
 
 logging.info("Finished training.")

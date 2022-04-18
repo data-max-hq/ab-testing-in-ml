@@ -1,6 +1,6 @@
 import dill
 
-from ml_utils import CleanTextTransformer, SpacyTokenTransformer
+from training.ml_utils import CleanTextTransformer, SpacyTokenTransformer
 
 
 class RedditClassifier(object):
@@ -9,10 +9,10 @@ class RedditClassifier(object):
         self._clean_text_transformer = CleanTextTransformer()
         self._spacy_tokenizer = SpacyTokenTransformer()
 
-        with open("tfidf_vectorizer.model", "rb") as model_file:
+        with open("../models/tfidf_vectorizer.model", "rb") as model_file:
             self._tfidf_vectorizer = dill.load(model_file)
 
-        with open("lr.model", "rb") as model_file:
+        with open("../models/lr.model", "rb") as model_file:
             self._lr_model = dill.load(model_file)
 
     def predict(self, X, feature_names):

@@ -5,6 +5,9 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
+COPY ./models/lr.model /models/lr.model
+COPY ./models/tfidf_vectorizer.model /models/tfidf_vectorizer.model
+
 # Copy source code
 COPY . .
 
