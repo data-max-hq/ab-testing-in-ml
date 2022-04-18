@@ -35,4 +35,5 @@ kubectl port-forward svc/ambassador -n ambassador 8080:80
 
 curl -X http://localhost:8080/seldon/myabtest/api/v1.0/predictions
 
-curl -v http://localhost:8080/seldon/myabtest/api/v1.0/predictions -d '{"data":{"names":["a","b"],"tensor":{"shape":[2,2],"values":[0,0,1,1]}}}' -H "Content-Type: application/json"
+# not using single namespace
+curl -v http://localhost:8080/seldon/seldon/myabtest/api/v1.0/predictions -d '{"data":{"names":["a","b"],"tensor":{"shape":[2,2],"values":[0,0,1,1]}}}' -H "Content-Type: application/json"
