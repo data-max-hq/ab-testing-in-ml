@@ -4,7 +4,7 @@ import dill
 import pandas as pd
 
 # This import may take a while as it will download the Spacy ENGLISH model
-from training.ml_utils import CleanTextTransformer, SpacyTokenTransformer
+from ml_utils import CleanTextTransformer, SpacyTokenTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split

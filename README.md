@@ -6,6 +6,12 @@
 
 ## Getting started
 
+### Train model
+```
+cd training
+python train.py
+```
+
 ### Deployment
 
 ## Testing
