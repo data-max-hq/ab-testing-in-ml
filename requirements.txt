@@ -3,5 +3,5 @@ seldon-core
 spacy
 dill
 pandas
-
+werkzeug==2.0.3
 matplotlib

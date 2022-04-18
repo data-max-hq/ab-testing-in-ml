@@ -6,7 +6,7 @@ from html.parser import HTMLParser
 import dill
 import sys, os
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_sm", disable=['ner'])
 
 
 class SpacyTokenTransformer(TransformerMixin):
