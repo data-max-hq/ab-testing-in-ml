@@ -3,3 +3,5 @@ seldon-core
 spacy
 dill
 pandas
+
+matplotlib
