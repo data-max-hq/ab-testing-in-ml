@@ -21,3 +21,12 @@ class RedditClassifier(object):
         tfidf_features = self._tfidf_vectorizer.transform(spacy_tokens)
         predictions = self._lr_model.predict_proba(tfidf_features)
         return predictions
+
+    def metrics(self):
+        # https://github.com/SeldonIO/seldon-core/blob/master/examples/models/custom_metrics/ModelWithMetrics.py
+        print("metrics called")
+        return [
+            {"type": "COUNTER", "key": "mycounter", "value": 1}, # a counter which will increase by the given value
+            {"type": "GAUGE", "key": "mygauge", "value": 100},   # a gauge which will be set to given value
+            {"type": "TIMER", "key": "mytimer", "value": 20.2},  # a timer which will add sum and count metrics - assumed millisecs
+        ]

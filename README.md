@@ -18,4 +18,5 @@
   * https://docs.seldon.io/projects/seldon-core/en/latest/examples/seldon_core_setup.html
   * https://docs.seldon.io/projects/seldon-core/en/latest/ingress/ambassador.html
 * Metrics: https://docs.seldon.io/projects/seldon-core/en/latest/examples/metrics.html
+  * https://github.com/SeldonIO/seldon-core/tree/master/examples/models/custom_metrics
 * 
