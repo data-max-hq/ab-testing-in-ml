@@ -1,6 +1,7 @@
 import logging
 
 import pickle
+import dill
 import pandas as pd
 
 # This import may take a while as it will download the Spacy ENGLISH model
@@ -74,10 +75,20 @@ lr.fit(x_train_tfidf, y_train)
 
 # These are the models we'll deploy
 logging.info("Dump models.")
-pickle.dump(tfidf_vectorizer, open("../models/tfidf_vectorizer.model", "wb"))
+# pickle.dump(tfidf_vectorizer, open("../models/tfidf_vectorizer.model", "wb"))
 with open("../models/tfidf_vectorizer.model", "wb") as model_file:
-    pickle.dump(tfidf_vectorizer, model_file)
+    dill.dump(tfidf_vectorizer, model_file)
 with open("../models/lr.model", "wb") as model_file:
-    pickle.dump(lr, model_file)
+    dill.dump(lr, model_file)
 
 logging.info("Finished training.")
+
+
+# test that our model works
+from app.RedditClassifier import RedditClassifier
+
+c = RedditClassifier()
+# With one sample
+sample = x_test[0:1]
+logging.info(sample)
+logging.info(c.predict(sample, ["feature_name"]))

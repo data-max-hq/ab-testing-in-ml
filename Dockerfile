@@ -1,9 +1,10 @@
-FROM python:3.7-slim
+FROM python:3.8.2-slim
 WORKDIR /app
 
 # Install python packages
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt && python -m spacy download en_core_web_sm
+RUN pip install -r requirements.txt
+RUN python -m spacy download en_core_web_sm
 
 COPY ./models/lr.model /models/lr.model
 COPY ./models/tfidf_vectorizer.model /models/tfidf_vectorizer.model
