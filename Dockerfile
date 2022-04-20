@@ -13,7 +13,7 @@ COPY ./models/tfidf_vectorizer.model /models/tfidf_vectorizer.model
 COPY ./app .
 
 # Port for GRPC
-EXPOSE 5000
+EXPOSE 6000
 # Port for REST
 EXPOSE 9000
 

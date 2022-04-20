@@ -1,7 +1,11 @@
 import dill
 
 from ml_utils import CleanTextTransformer, SpacyTokenTransformer
-
+import logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - [%(filename)s:%(lineno)d] - %(levelname)s - %(message)s'
+)
 
 class RedditClassifier(object):
     def __init__(self):
@@ -16,6 +20,7 @@ class RedditClassifier(object):
             self._lr_model = dill.load(model_file)
 
     def predict(self, X, feature_names):
+        logging.info("Got request.")
         clean_text = self._clean_text_transformer.transform(X)
         spacy_tokens = self._spacy_tokenizer.transform(clean_text)
         tfidf_features = self._tfidf_vectorizer.transform(spacy_tokens)
@@ -30,3 +35,6 @@ class RedditClassifier(object):
             {"type": "GAUGE", "key": "mygauge", "value": 100},   # a gauge which will be set to given value
             {"type": "TIMER", "key": "mytimer", "value": 20.2},  # a timer which will add sum and count metrics - assumed millisecs
         ]
+
+    def tags(self):
+        return {"mytag": 1}
