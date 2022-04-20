@@ -27,6 +27,9 @@ seldon:
 		--create-namespace \
 		--namespace seldon-system
 
+load:
+	minikube image load abtest:0.5
+
 seldon-analytics:
 	helm upgrade --install seldon-core-analytics seldon-core-analytics \
        --repo https://storage.googleapis.com/seldon-charts \
@@ -35,3 +38,6 @@ seldon-analytics:
 
 abtest:
 	helm upgrade --install abtest ./charts/abtest --create-namespace --namespace seldon
+
+uninstall:
+	helm uninstall abtest --namespace seldon

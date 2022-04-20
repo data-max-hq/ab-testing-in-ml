@@ -1,0 +1,28 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: "{{ .Release.Name }}"
+  namespace: seldon
+spec:
+  name: "{{ .Release.Name }}"
+  annotations:
+    project_name: project_name
+    deployment_version: v1
+  predictors:
+    - name: "{{ .Values.predictor.name }}"
+      replicas: 1
+      componentSpecs:
+        - spec:
+            containers:
+              - image: "{{ .Values.modela.image.name }}:{{ .Values.modela.image.version }}"
+                imagePullPolicy: IfNotPresent
+                name: "{{ .Values.modela.name }}"
+            terminationGracePeriodSeconds: 1
+      graph:
+        children: []
+        endpoint:
+          type: REST
+        name: "{{ .Values.modela.name }}"
+        type: MODEL
