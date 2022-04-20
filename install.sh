@@ -48,10 +48,3 @@ curl -v -X POST -H 'Content-Type: application/json' \
    -d '{"data": { "ndarray": ["this is a terrible comment"], "names": ["tfidf"] } }' \
      http://localhost:8080/seldon/seldon/abtest/api/v1.0/predictions
 
-helm repo add istio https://istio-release.storage.googleapis.com/charts
-helm repo update
-
-kubectl create namespace istio-system
-helm upgrade --install istio-base istio/base -n istio-system
-helm upgrade --install istiod istio/istiod -n istio-system --wait
-
