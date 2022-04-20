@@ -7,12 +7,12 @@ minikube:
 		minikube start --memory 10000 --cpus 4 \
 		--insecure-registry "10.0.0.0/24" \
 		--driver=docker --kubernetes-version=v1.21.6 \
-		--mountls
+		--mount
 
 ambassador:
 	helm upgrade --install ambassador datawire/ambassador \
       --set image.repository=docker.io/datawire/ambassador \
-      --values values.ambassador.local.yaml \
+      --values ./charts/ambassador/values.ambassador.local.yaml \
       --create-namespace \
       --namespace ambassador
 
@@ -34,4 +34,4 @@ seldon-analytics:
        --namespace seldon-system
 
 abtest:
-	helm upgrade --install abtest ./abtest --create-namespace --namespace seldon
+	helm upgrade --install abtest ./charts/abtest --create-namespace --namespace seldon

@@ -1,14 +1,14 @@
 separate_pods: true
 modela:
   image:
-    name: seldonio/mock_classifier
-    version: 1.14.0-dev
+    name: abtest
+    version: 0.2
   name: classifier-1
 #  resources: { "requests": { "memory": "1Mi" }}
 modelb:
   image:
-    name: seldonio/mock_classifier
-    version: 1.14.0-dev
+    name: abtest
+    version: 0.2
   name: classifier-2
 traffic_modela_percentage: 0.5
 replicas: 1

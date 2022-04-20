@@ -36,8 +36,14 @@ kubectl port-forward svc/ambassador -n ambassador 8080:80
 curl -X http://localhost:8080/seldon/myabtest/api/v1.0/predictions
 
 # not using single namespace
-curl -v http://localhost:8080/seldon/seldon/myabtest/api/v1.0/predictions -d '{"data":{"names":["a","b"],"tensor":{"shape":[2,2],"values":[0,0,1,1]}}}' -H "Content-Type: application/json"
+curl -v http://localhost:8080/seldon/seldon/abtest/api/v1.0/predictions -d '{"data":{"names":["a","b"],"tensor":{"shape":[2,2],"values":[0,0,1,1]}}}' -H "Content-Type: application/json"
 
 
 docker build -t abtest:0.1 .
-docker run --name "reddit_predictor" -d --rm -p 9001:9000 abtest:0.1
+docker run --name "reddit_predictor" -d --rm -p 9001:9000 abtest:0.2
+
+minikube image load abtest:0.2
+
+curl -v -X POST -H 'Content-Type: application/json' \
+   -d '{"data": { "ndarray": ["this is a terrible comment"], "names": ["tfidf"] } }' \
+     http://localhost:8080/seldon/seldon/abtest/api/v1.0/predictions
