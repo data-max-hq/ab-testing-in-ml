@@ -13,6 +13,7 @@ spec:
   predictors:
     - name: "{{ .Values.predictor.name }}"
       replicas: 1
+      traffic: 75
       componentSpecs:
         - spec:
             containers:
@@ -26,3 +27,19 @@ spec:
           type: REST
         name: "{{ .Values.modela.name }}"
         type: MODEL
+    - componentSpecs:
+      - spec:
+          containers:
+            - image: "{{ .Values.modelb.image.name }}:{{ .Values.modelb.image.version }}"
+              imagePullPolicy: IfNotPresent
+              name: "{{ .Values.modelb.name }}"
+          terminationGracePeriodSeconds: 1
+      graph:
+        children: [ ]
+        endpoint:
+          type: REST
+        name: "{{ .Values.modelb.name }}"
+        type: MODEL
+      name: canary
+      replicas: 1
+      traffic: 25
