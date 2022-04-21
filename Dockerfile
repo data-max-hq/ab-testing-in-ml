@@ -20,6 +20,7 @@ EXPOSE 9000
 # Define environment variables
 ENV MODEL_NAME RedditClassifier
 ENV SERVICE_TYPE MODEL
+ENV VERSION A
 
 # Changing folder to default user
 RUN chown -R 8888 /app

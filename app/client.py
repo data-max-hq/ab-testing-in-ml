@@ -23,7 +23,7 @@ sc = SeldonClient(
     namespace="seldon",
 )
 
-for i in range(100):
+for i in range(1000):
 
     client_prediction = sc.predict(
         data=np.array(["Hello world this is a test"]),
