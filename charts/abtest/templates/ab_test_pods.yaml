@@ -11,35 +11,41 @@ spec:
     project_name: project_name
     deployment_version: v1
   predictors:
-    - name: "{{ .Values.predictor.name }}"
+    - name: "{{ .Values.model_a.name }}"
       replicas: 1
       traffic: 75
       componentSpecs:
         - spec:
             containers:
-              - image: "{{ .Values.modela.image.name }}:{{ .Values.modela.image.version }}"
+              - image: "{{ .Values.model_a.image.name }}:{{ .Values.model_a.image.version }}"
                 imagePullPolicy: IfNotPresent
-                name: "{{ .Values.modela.name }}"
+                name: "{{ .Values.model_a.name }}"
+                env:
+                  - name: VERSION
+                    value: "A"
             terminationGracePeriodSeconds: 1
       graph:
         children: []
         endpoint:
           type: REST
-        name: "{{ .Values.modela.name }}"
+        name: "{{ .Values.model_a.name }}"
         type: MODEL
     - componentSpecs:
       - spec:
           containers:
-            - image: "{{ .Values.modelb.image.name }}:{{ .Values.modelb.image.version }}"
+            - image: "{{ .Values.model_b.image.name }}:{{ .Values.model_b.image.version }}"
               imagePullPolicy: IfNotPresent
-              name: "{{ .Values.modelb.name }}"
+              name: "{{ .Values.model_b.name }}"
+              env:
+                - name: VERSION
+                  value: "B"
           terminationGracePeriodSeconds: 1
       graph:
         children: [ ]
         endpoint:
           type: REST
-        name: "{{ .Values.modelb.name }}"
+        name: "{{ .Values.model_b.name }}"
         type: MODEL
-      name: canary
+      name: "{{ .Values.model_b.name }}"
       replicas: 1
       traffic: 25

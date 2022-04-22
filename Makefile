@@ -31,11 +31,12 @@ seldon:
 		--namespace seldon-system
 
 load:
-	minikube image load abtest:0.5
+	minikube image load abtest:0.1
 
 seldon-analytics:
 	helm upgrade --install seldon-core-analytics seldon-core-analytics \
        --repo https://storage.googleapis.com/seldon-charts \
+       --set grafana.adminPassword="admin" \
        --create-namespace \
        --namespace seldon-system
 
