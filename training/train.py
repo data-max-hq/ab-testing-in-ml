@@ -5,7 +5,8 @@ import dill
 import pandas as pd
 
 # This import may take a while as it will download the Spacy ENGLISH model
-from ml_utils import CleanTextTransformer, SpacyTokenTransformer
+from app.ml_utils import CleanTextTransformer, SpacyTokenTransformer
+from app.RedditClassifier import RedditClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
@@ -83,12 +84,8 @@ with open("../models/lr.model", "wb") as model_file:
 
 logging.info("Finished training.")
 
-
-# test that our model works
-from app.RedditClassifier import RedditClassifier
-
-c = RedditClassifier()
+classifier = RedditClassifier(models_dir="../models")
 # With one sample
 sample = x_test[0:1]
 logging.info(sample)
-logging.info(c.predict(sample, ["feature_name"]))
+logging.info(classifier.predict(sample, ["feature_name"]))
