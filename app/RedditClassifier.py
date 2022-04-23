@@ -30,6 +30,7 @@ class RedditClassifier(object):
 
     def predict(self, X, feature_names):
         logging.info("Got request.")
+        logging.info(f"X={X}.")
         start_time = datetime.datetime.now()
         clean_text = self._clean_text_transformer.transform(X)
         spacy_tokens = self._spacy_tokenizer.transform(clean_text)

@@ -4,18 +4,6 @@ from seldon_core.seldon_client import SeldonClient
 
 import numpy as np
 
-# sc = SeldonClient(
-#     deployment_name="abtest",
-#     namespace="seldon",
-#     gateway_endpoint="localhost:8003",
-#     gateway="ambassador",
-# )
-#
-# r = sc.predict(transport="rest")
-# assert r.success is True
-# print(r)
-
-
 sc = SeldonClient(
     gateway="ambassador",
     transport="rest",
