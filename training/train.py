@@ -1,10 +1,8 @@
 import logging
 
-import pickle
 import dill
 import pandas as pd
 
-# This import may take a while as it will download the Spacy ENGLISH model
 from app.ml_utils import CleanTextTransformer, SpacyTokenTransformer
 from app.RedditClassifier import RedditClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -12,7 +10,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
 # Source: https://github.com/SeldonIO/seldon-core/tree/master/examples/models/sklearn_spacy_text
-
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - [%(filename)s:%(lineno)d] - %(levelname)s - %(message)s'
@@ -84,8 +81,10 @@ with open("../models/lr.model", "wb") as model_file:
 
 logging.info("Finished training.")
 
+logging.info("Test model prediction.")
 classifier = RedditClassifier(models_dir="../models")
 # With one sample
 sample = x_test[0:1]
 logging.info(sample)
 logging.info(classifier.predict(sample, ["feature_name"]))
+logging.info("Finished testing.")
