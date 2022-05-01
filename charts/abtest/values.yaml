@@ -1,16 +1,15 @@
 separate_pods: true
 model_a:
   image:
-    name: abtest
-    version: 0.5
+    name: ab-test
+    version: a
   name: classifier-1
 #  resources: { "requests": { "memory": "1Mi" }}
 model_b:
   image:
-    name: abtest
-    version: 0.6
+    name: ab-test
+    version: b
   name: classifier-2
-traffic_modela_percentage: 0.5
 replicas: 1
 predictor:
-  name: default
+  name: abtesting

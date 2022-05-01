@@ -36,7 +36,9 @@ class RedditClassifier(object):
         spacy_tokens = self._spacy_tokenizer.transform(clean_text)
         tfidf_features = self._tfidf_vectorizer.transform(spacy_tokens)
         predictions = self._lr_model.predict_proba(tfidf_features)
-        if self._version == "B":
+
+        # Artificial sleep delay added only for version A
+        if self._version == "A":
             sleep_time = random.uniform(0.1, 1.0)
             logging.info(f"Version {self._version} waiting for {sleep_time} sec.")
             sleep(sleep_time)
@@ -51,9 +53,7 @@ class RedditClassifier(object):
         # https://github.com/SeldonIO/seldon-core/blob/master/examples/models/custom_metrics/ModelWithMetrics.py
         print("metrics called")
         return [
-            {"type": "COUNTER", "key": "mycounter", "value": 1},  # a counter which will increase by the given value
-            {"type": "GAUGE", "key": "gauge_runtime", "value": self._run_time},   # a gauge which will be set to given value
-            {"type": "TIMER", "key": "runtime", "value": self._run_time},  # a timer which will add sum and count metrics - assumed millisecs
+            {"type": "GAUGE", "key": "gauge_runtime", "value": self._run_time}
         ]
 
     def tags(self):

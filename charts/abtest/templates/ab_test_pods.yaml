@@ -13,7 +13,7 @@ spec:
   predictors:
     - name: "{{ .Values.model_a.name }}"
       replicas: 1
-      traffic: 75
+      traffic: 50
       componentSpecs:
         - spec:
             containers:
@@ -48,4 +48,4 @@ spec:
         type: MODEL
       name: "{{ .Values.model_b.name }}"
       replicas: 1
-      traffic: 25
+      traffic: 50

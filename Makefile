@@ -2,9 +2,9 @@ all: minikube seldon seldon-analytics ambassador load abtest port
 
 minikube:
 	minikube start --memory 10000 --cpus 4 \
-		--insecure-registry "10.0.0.0/24" \
-		--driver=docker --kubernetes-version=v1.21.6 \
-		--mount
+	  --insecure-registry "10.0.0.0/24" \
+	  --driver=docker --kubernetes-version=v1.21.6 \
+	  --mount
 
 ambassador:
 	helm upgrade --install ambassador datawire/ambassador \
@@ -24,14 +24,19 @@ port-grafana:
 
 seldon:
 	helm upgrade --install seldon-core seldon-core-operator \
-    	--repo https://storage.googleapis.com/seldon-charts \
-		--set usageMetrics.enabled=false \
-		--set ambassador.enabled=true \
-		--create-namespace \
-		--namespace seldon-system
+      --repo https://storage.googleapis.com/seldon-charts \
+	  --set usageMetrics.enabled=false \
+	  --set ambassador.enabled=true \
+	  --create-namespace \
+	  --namespace seldon-system
+
+build:
+	docker build -t ab-test:a -f Dockerfile.a .
+	docker build -t ab-test:b -f Dockerfile.b .
 
 load:
-	minikube image load abtest:0.1
+	minikube image load ab-test:a
+	minikube image load ab-test:b
 
 seldon-analytics:
 	helm upgrade --install seldon-core-analytics seldon-core-analytics \
@@ -41,7 +46,8 @@ seldon-analytics:
        --namespace seldon-system
 
 abtest:
-	helm upgrade --install abtest ./charts/abtest --create-namespace --namespace seldon
+	helm upgrade --install abtest ./charts/abtest \
+		--create-namespace --namespace seldon
 
 uninstall:
 	helm uninstall abtest --namespace seldon
