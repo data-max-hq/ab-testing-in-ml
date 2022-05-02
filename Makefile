@@ -1,4 +1,4 @@
-all: minikube seldon seldon-analytics ambassador load abtest port
+all: minikube seldon seldon-analytics ambassador build load abtest port
 
 minikube:
 	minikube start --memory 10000 --cpus 4 \
@@ -54,3 +54,6 @@ run:
 
 uninstall:
 	helm uninstall abtest --namespace seldon
+
+delete:
+	minikube delete
