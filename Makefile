@@ -49,5 +49,8 @@ abtest:
 	helm upgrade --install abtest ./charts/abtest \
 		--create-namespace --namespace seldon
 
+run:
+	python app/client.py
+
 uninstall:
 	helm uninstall abtest --namespace seldon
