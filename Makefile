@@ -50,7 +50,7 @@ abtest:
 		--create-namespace --namespace seldon
 
 run:
-	python app/client.py
+	python seldon_client/client.py
 
 uninstall:
 	helm uninstall abtest --namespace seldon
