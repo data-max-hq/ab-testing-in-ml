@@ -3,9 +3,6 @@ import re
 import numpy as np
 from sklearn.base import TransformerMixin
 from html.parser import HTMLParser
-import dill
-import sys
-import os
 
 nlp = spacy.load("en_core_web_sm", disable=['ner'])
 

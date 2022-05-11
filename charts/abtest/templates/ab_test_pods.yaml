@@ -30,7 +30,10 @@ spec:
           type: REST
         name: "{{ .Values.model_a.name }}"
         type: MODEL
-    - componentSpecs:
+    - name: "{{ .Values.model_b.name }}"
+      replicas: 1
+      traffic: 50
+      componentSpecs:
       - spec:
           containers:
             - image: "{{ .Values.model_b.image.name }}:{{ .Values.model_b.image.version }}"
@@ -46,6 +49,3 @@ spec:
           type: REST
         name: "{{ .Values.model_b.name }}"
         type: MODEL
-      name: "{{ .Values.model_b.name }}"
-      replicas: 1
-      traffic: 50

@@ -50,8 +50,6 @@ class RedditClassifier(object):
         return predictions
 
     def metrics(self):
-        # https://github.com/SeldonIO/seldon-core/blob/master/examples/models/custom_metrics/ModelWithMetrics.py
-        print("metrics called")
         return [
             {"type": "GAUGE", "key": "gauge_runtime", "value": self._run_time}
         ]

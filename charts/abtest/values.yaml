@@ -3,13 +3,13 @@ model_a:
   image:
     name: ab-test
     version: a
-  name: classifier-1
+  name: classifier-a
 #  resources: { "requests": { "memory": "1Mi" }}
 model_b:
   image:
     name: ab-test
     version: b
-  name: classifier-2
+  name: classifier-b
 replicas: 1
 predictor:
   name: abtesting
