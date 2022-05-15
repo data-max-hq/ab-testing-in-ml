@@ -57,3 +57,8 @@ uninstall:
 
 delete:
 	minikube delete
+
+curl:
+	curl -X POST -H 'Content-Type: application/json' \
+		-d '{"data": { "ndarray": ["This is a nice comment."]}}' \
+		http://localhost:8080/seldon/seldon/abtest/api/v1.0/predictions
