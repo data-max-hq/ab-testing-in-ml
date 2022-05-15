@@ -13,14 +13,8 @@ ambassador:
       --create-namespace \
       --namespace ambassador
 
-admin:
-	kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
-
 port:
 	kubectl port-forward svc/ambassador -n ambassador 8080:80
-
-port-grafana:
-	kubectl port-forward svc/seldon-core-analytics-grafana -n seldon-system 3000:80
 
 seldon:
 	helm upgrade --install seldon-core seldon-core-operator \
@@ -30,6 +24,16 @@ seldon:
 	  --create-namespace \
 	  --namespace seldon-system
 
+seldon-analytics:
+	helm upgrade --install seldon-core-analytics seldon-core-analytics \
+       --repo https://storage.googleapis.com/seldon-charts \
+       --set grafana.adminPassword="admin" \
+       --create-namespace \
+       --namespace seldon-system
+
+port-grafana:
+	kubectl port-forward svc/seldon-core-analytics-grafana -n seldon-system 3000:80
+
 build:
 	docker build -t ab-test:a -f Dockerfile.a .
 	docker build -t ab-test:b -f Dockerfile.b .
@@ -38,16 +42,14 @@ load:
 	minikube image load ab-test:a
 	minikube image load ab-test:b
 
-seldon-analytics:
-	helm upgrade --install seldon-core-analytics seldon-core-analytics \
-       --repo https://storage.googleapis.com/seldon-charts \
-       --set grafana.adminPassword="admin" \
-       --create-namespace \
-       --namespace seldon-system
-
 abtest:
 	helm upgrade --install abtest ./charts/abtest \
 		--create-namespace --namespace seldon
+
+curl:
+	curl -X POST -H 'Content-Type: application/json' \
+		-d '{"data": { "ndarray": ["This is a nice comment."]}}' \
+		http://localhost:8080/seldon/seldon/abtest/api/v1.0/predictions
 
 run:
 	python seldon_client/client.py
@@ -57,8 +59,3 @@ uninstall:
 
 delete:
 	minikube delete
-
-curl:
-	curl -X POST -H 'Content-Type: application/json' \
-		-d '{"data": { "ndarray": ["This is a nice comment."]}}' \
-		http://localhost:8080/seldon/seldon/abtest/api/v1.0/predictions

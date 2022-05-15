@@ -84,7 +84,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Model A Prediction time",
+      "title": "Model A Prediction time (ms)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -103,7 +103,7 @@
           "format": "short",
           "label": null,
           "logBase": 1,
-          "max": null,
+          "max": "1000",
           "min": null,
           "show": true
         },
@@ -178,7 +178,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Model B Prediction Time",
+      "title": "Model B Prediction Time (ms)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -197,7 +197,7 @@
           "format": "short",
           "label": null,
           "logBase": 1,
-          "max": null,
+          "max": "100",
           "min": null,
           "show": true
         },
@@ -224,7 +224,7 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-10m",
     "to": "now"
   },
   "timepicker": {
@@ -243,5 +243,5 @@
   "timezone": "",
   "title": "Metrics Dashboard",
   "uid": "qE5fDMlnz",
-  "version": 3
+  "version": 5
 }
