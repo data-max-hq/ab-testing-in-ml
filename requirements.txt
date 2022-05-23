@@ -2,7 +2,7 @@ scikit-learn
 seldon-core
 scipy==1.7.3
 dill==0.3.2
-pandas
+pandas==1.0.4
 werkzeug==2.0.3
 spacy==2.3.2
 matplotlib

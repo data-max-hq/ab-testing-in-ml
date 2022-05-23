@@ -3,8 +3,11 @@ all: minikube seldon seldon-analytics ambassador build load abtest port
 minikube:
 	minikube start --memory 10000 --cpus 4 \
 	  --insecure-registry "10.0.0.0/24" \
-	  --driver=docker --kubernetes-version=v1.21.6 \
-	  --mount
+	  --driver=docker --kubernetes-version=v1.21.6
+
+train:
+	cd training
+	python train.py
 
 ambassador:
 	helm upgrade --install ambassador datawire/ambassador \
@@ -16,7 +19,7 @@ ambassador:
 port:
 	kubectl port-forward svc/ambassador -n ambassador 8080:80
 
-seldon:
+seldon-core:
 	helm upgrade --install seldon-core seldon-core-operator \
       --repo https://storage.googleapis.com/seldon-charts \
 	  --set usageMetrics.enabled=false \
@@ -24,7 +27,7 @@ seldon:
 	  --create-namespace \
 	  --namespace seldon-system
 
-seldon-analytics:
+seldon-core-analytics:
 	helm upgrade --install seldon-core-analytics seldon-core-analytics \
        --repo https://storage.googleapis.com/seldon-charts \
        --set grafana.adminPassword="admin" \
