@@ -56,6 +56,17 @@ make seldon-core
 ```bash
 make abtest
 ```
+
+### Port-forward ambassador
+```bash
+make port
+```
+
+### Port-forward Grafana
+```bash
+make port-grafana
+```
+
 ## Testing
 ```bash
 curl -X POST -H 'Content-Type: application/json' \
@@ -65,11 +76,9 @@ curl -X POST -H 'Content-Type: application/json' \
 
 ## References
 
-* Trainig: https://github.com/SeldonIO/seldon-core/tree/master/examples/models/sklearn_spacy_text
-* ABTest helm: https://github.com/SeldonIO/seldon-core/tree/master/helm-charts/seldon-abtest
-* Seldon Installation: https://docs.seldon.io/projects/seldon-core/en/latest/ingress/ambassador.html
-  * https://docs.seldon.io/projects/seldon-core/en/latest/examples/seldon_core_setup.html
-  * https://docs.seldon.io/projects/seldon-core/en/latest/ingress/ambassador.html
-* Metrics: https://docs.seldon.io/projects/seldon-core/en/latest/examples/metrics.html
-  * https://github.com/SeldonIO/seldon-core/tree/master/examples/models/custom_metrics
-* 
+* Training: https://github.com/SeldonIO/seldon-core/tree/master/examples/models/sklearn_spacy_text
+* Seldon-core installation: 
+  * Install Ambassador: https://docs.seldon.io/projects/seldon-core/en/latest/ingress/ambassador.html
+  * Install seldon-core operator: https://docs.seldon.io/projects/seldon-core/en/latest/workflow/install.html
+* Seldon-core-analytics installation: https://docs.seldon.io/projects/seldon-core/en/latest/charts/seldon-core-analytics.html
+* Custom metrics: https://docs.seldon.io/projects/seldon-core/en/latest/examples/runtime_metrics_tags.html
