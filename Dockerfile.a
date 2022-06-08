@@ -11,7 +11,7 @@ COPY ./models/tfidf_vectorizer.model /models/tfidf_vectorizer.model
 
 # Copy source code
 COPY ./app .
-COPY ./utils .
+COPY ./utils ./utils
 
 # Port for GRPC
 EXPOSE 6000
