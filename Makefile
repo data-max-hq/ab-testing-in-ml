@@ -4,8 +4,7 @@ minikube:
 	minikube start --driver=docker --kubernetes-version=v1.21.6
 
 train:
-	cd training
-	python train.py
+	python train_models.py
 
 ambassador:
 	helm repo add datawire https://www.getambassador.io

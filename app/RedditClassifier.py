@@ -5,7 +5,7 @@ import random
 
 import dill
 
-from ml_utils import CleanTextTransformer, SpacyTokenTransformer
+from utils.ml_utils import CleanTextTransformer, SpacyTokenTransformer
 import logging
 logging.basicConfig(
     level=logging.INFO,
