@@ -1,4 +1,4 @@
-all: minikube seldon seldon-analytics ambassador build load abtest port
+all: minikube seldon-core seldon-core-analytics ambassador build load abtest port
 
 minikube:
 	minikube start --driver=docker --kubernetes-version=v1.21.6
