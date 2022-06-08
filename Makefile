@@ -1,8 +1,7 @@
 all: minikube seldon seldon-analytics ambassador build load abtest port
 
 minikube:
-	minikube start --memory 10000 --cpus 4 \
-	  --insecure-registry "10.0.0.0/24" \
+	minikube start \
 	  --driver=docker --kubernetes-version=v1.21.6
 
 train:
