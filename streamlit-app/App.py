@@ -73,69 +73,10 @@ def main():
     """
     )
 
-    # st.markdown(
-    #     """
-    # #### Description of Features
-    # This app is designed to predict whether customer will churn the company or not. You can input the features of the product listed below and get the prediction.
-    # - Customers who left within the last month:- the column is called Churn
-    # - Services that each customer has signed up for:-  phone, multiple lines, internet, online security, online backup, device protection, tech support, and streaming TV and movies
-    # - Customer account information:- how long they have been a customer, contract, payment method, paperless billing, monthly charges, and total charges
-    # - Demographic info about customers:- gender, age range, and if they have partners and dependents
-    #
-    # """
-    # )
-    # customer_id = st.number_input("Customer ID")
-    # gender = st.number_input("Gender")
-    # SeniorCitizen = st.number_input("Senior Citizen")
-    # Partner = st.number_input("Partner")
-    # Dependents = st.number_input("Dependents")
-    # tenure = st.number_input("tenure")
-    # PhoneService = st.number_input("PhoneService")
-    # MultipleLines = st.number_input("MultipleLines")
-    # InternetService = st.number_input("InternetService")
-    # OnlineSecurity = st.number_input("OnlineSecurity")
-    # OnlineBackup = st.number_input("OnlineBackup")
-    # DeviceProtection = st.number_input("DeviceProtection")
-    # TechSupport = st.number_input("TechSupport")
-    # StreamingTV = st.number_input("StreamingTV")
-    # StreamingMovies = st.number_input("StreamingMovies")
-    # Contract = st.number_input("Contract")
-    # PaperlessBilling = st.number_input("PaperlessBilling")
-    # PaymentMethod = st.number_input("PaymentMethod")
-    # MonthlyCharges = st.number_input("MonthlyCharges")
-    # TotalCharges = st.number_input("TotalCharges")
-
     if st.button("Predict"):
         test_data = get_test_data()
         send_predictions(test_data)
 
-        # pred = [
-        #     [
-        #         customer_id,
-        #         gender,
-        #         SeniorCitizen,
-        #         Partner,
-        #         Dependents,
-        #         tenure,
-        #         PhoneService,
-        #         MultipleLines,
-        #         InternetService,
-        #         OnlineSecurity,
-        #         OnlineBackup,
-        #         DeviceProtection,
-        #         TechSupport,
-        #         StreamingTV,
-        #         StreamingMovies,
-        #         Contract,
-        #         PaperlessBilling,
-        #         PaymentMethod,
-        #         MonthlyCharges,
-        #         TotalCharges,
-        #     ]
-        # ]
-        # data = np.array(pred)
-        # pred = service.predict(data)
-        # st.success(f"Given the customer's historical data, model says:- {pred}")
         st.success(f"Given the customer's historical data, model says:- ?")
 
 

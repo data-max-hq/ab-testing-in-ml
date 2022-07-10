@@ -1,14 +1,12 @@
-import logging
+from time import sleep
 
 import numpy as np
-import pandas as pd
 import streamlit as st
 
-from sklearn.model_selection import train_test_split
 from seldon_core.seldon_client import SeldonClient
 
 
-def send_client_request(seldon_client, test_text):
+def send_client_request(seldon_client):
 
     client_prediction = seldon_client.predict(
         data=np.array([test_text]),
@@ -30,18 +28,33 @@ sc = SeldonClient(
 
 
 st.title("Practical guide to A/B Testing for ML applications")
+st.markdown("***")
 st.markdown(
     """ 
-#### Send a test request
-
-"""
+    ### Sending a test request
+    """
 )
-
+st.text("\n")
 test_text = st.text_input("Input Message", value="This is a good message.")
+st.text("\n")
 
 if st.button("Predict"):
+    with st.spinner(text='In progress'):
+        sleep(0.5)
+        prediction = send_client_request(sc)
+        data = prediction.response.get("data")
+        meta = prediction.response.get("meta")
+        result = data.get("ndarray")
+        tag = meta.get("tags")
+        metrics = meta.get("metrics")
+        version = tag.get("version")
+        response_time = int(metrics[0].get("value"))
 
-    prediction = send_client_request(sc, test_text=test_text)
-    logging.info(prediction)
+        st.success(
+            f"""
+                Prediction: {result}. \n\n  
+                Model Version: {version}. \n\n 
+                Response time: {response_time} ms.
+            """
+        )
 
-    st.success(prediction)
