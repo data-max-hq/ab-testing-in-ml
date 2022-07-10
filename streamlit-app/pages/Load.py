@@ -21,12 +21,12 @@ st.text("\n")
 
 def update_metrics_a():
     placeholder_model_a_count.metric("Model A responses", st.session_state.model_a_count)
-    placeholder_model_a_latest.metric("Latest response time", st.session_state.model_a_latest)
+    placeholder_model_a_latest.metric("Latest response time", f"{st.session_state.model_a_latest} ms")
 
 
 def update_metrics_b():
     placeholder_model_b_count.metric("Model B responses", st.session_state.model_b_count)
-    placeholder_model_b_latest.metric("Latest response time", st.session_state.model_b_latest)
+    placeholder_model_b_latest.metric("Latest response time", f"{st.session_state.model_b_latest} ms")
 
 
 def init_session_state():
