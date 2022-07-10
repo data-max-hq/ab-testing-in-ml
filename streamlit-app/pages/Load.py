@@ -138,4 +138,4 @@ if load_predict_button:
     send_predictions(test_data[:10])
 
     placeholder_sending.text("")
-    st.success(f"Finished.")
+    st.success(f"🧘‍ Finished.")
