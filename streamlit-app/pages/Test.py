@@ -7,7 +7,6 @@ from seldon_core.seldon_client import SeldonClient
 
 
 def send_client_request(seldon_client):
-
     client_prediction = seldon_client.predict(
         data=np.array([test_text]),
         deployment_name="abtest",
@@ -26,7 +25,7 @@ sc = SeldonClient(
     namespace="seldon",
 )
 
-
+st.sidebar.image("./resources/logo.png", use_column_width=True)
 st.title("Practical guide to A/B Testing for ML applications")
 st.markdown("***")
 st.markdown(

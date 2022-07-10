@@ -1,3 +1,5 @@
 import streamlit as st
 
-st.write("# About Data Max! 👋")
+st.image("./resources/logo.png", use_column_width=True)
+
+st.write("# Hello from Data Max! 👋")

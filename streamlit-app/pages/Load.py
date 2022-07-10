@@ -8,6 +8,7 @@ import streamlit as st
 from sklearn.model_selection import train_test_split
 from seldon_core.seldon_client import SeldonClient
 
+st.sidebar.image("./resources/logo.png", use_column_width=True)
 st.title("Practical guide to A/B Testing for ML applications")
 st.markdown("***")
 
@@ -34,6 +35,24 @@ def init_session_state():
     st.session_state.model_a_latest = 0
     st.session_state.model_b_count = 0
     st.session_state.model_b_latest = 0
+
+
+def update_state_and_ui(prediction):
+    meta = prediction.response.get("meta")
+    tag = meta.get("tags")
+    metrics = meta.get("metrics")
+    version = tag.get("version")
+    response_time = int(metrics[0].get("value"))
+
+    if version == "A":
+        st.session_state.model_a_count = st.session_state.model_a_count + 1
+        st.session_state.model_a_latest = response_time
+        update_metrics_a()
+
+    else:
+        st.session_state.model_b_count = st.session_state.model_b_count + 1
+        st.session_state.model_b_latest = response_time
+        update_metrics_b()
 
 
 init_session_state()
@@ -84,7 +103,6 @@ def get_test_data():
 
 
 def send_client_request(seldon_client, test_text):
-
     client_prediction = seldon_client.predict(
         data=np.array([test_text]),
         deployment_name="abtest",
@@ -104,21 +122,7 @@ def send_predictions(x_test):
 
         prediction = send_client_request(sc, to_classify_text)
         logging.info(prediction)
-        meta = prediction.response.get("meta")
-        tag = meta.get("tags")
-        metrics = meta.get("metrics")
-        version = tag.get("version")
-        response_time = int(metrics[0].get("value"))
-
-        if version == "A":
-            st.session_state.model_a_count = st.session_state.model_a_count + 1
-            st.session_state.model_a_latest = response_time
-            update_metrics_a()
-
-        else:
-            st.session_state.model_b_count = st.session_state.model_b_count + 1
-            st.session_state.model_b_latest = response_time
-            update_metrics_b()
+        update_state_and_ui(prediction)
 
         sleep(0.5)
 

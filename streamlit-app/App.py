@@ -2,6 +2,7 @@ import streamlit as st
 
 
 def main():
+    st.sidebar.image("./resources/logo.png", use_column_width=True)
     st.title("Practical guide to A/B Testing for ML applications")
 
     st.markdown(
