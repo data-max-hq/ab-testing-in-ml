@@ -42,6 +42,8 @@ if 'model_b_latest' not in st.session_state:
 load_predict_button = st.button("Predict")
 st.text("\n")
 
+placeholder_sending = st.empty()
+
 progress_bar = st.progress(0)
 st.text("\n")
 
@@ -131,6 +133,7 @@ sc = SeldonClient(
 )
 
 if load_predict_button:
+    placeholder_sending.warning("Sending many requests...")
     st.session_state.model_a_count = 0
     st.session_state.model_a_latest = 0
     st.session_state.model_b_count = 0
@@ -139,4 +142,5 @@ if load_predict_button:
     test_data = get_test_data()
     send_predictions(test_data[:10])
 
+    placeholder_sending.text("")
     st.success(f"Finished.")
