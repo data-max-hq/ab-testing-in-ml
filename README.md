@@ -74,6 +74,11 @@ curl -X POST -H 'Content-Type: application/json' \
     http://localhost:8080/seldon/seldon/abtest/api/v1.0/predictions
 ```
 
+## Start Streamlit App
+```shell
+make run-streamlit
+```
+
 ## References
 
 * Training: https://github.com/SeldonIO/seldon-core/tree/master/examples/models/sklearn_spacy_text

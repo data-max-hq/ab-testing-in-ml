@@ -55,6 +55,9 @@ curl:
 run:
 	python seldon_client/client.py
 
+run-streamlit:
+	streamlit run streamlit-app/App.py
+
 uninstall:
 	helm uninstall abtest --namespace seldon
 
