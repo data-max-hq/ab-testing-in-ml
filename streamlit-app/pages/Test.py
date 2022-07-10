@@ -37,8 +37,9 @@ st.markdown(
 """
 )
 
+test_text = st.text_input("Input Message", value="This is a good message.")
+
 if st.button("Predict"):
-    test_text = "This is a good message."
 
     prediction = send_client_request(sc, test_text=test_text)
     logging.info(prediction)
