@@ -55,7 +55,7 @@ curl:
 run:
 	python seldon_client/client.py
 
-run-streamlit:
+streamlit:
 	streamlit run streamlit-app/App.py
 
 uninstall:

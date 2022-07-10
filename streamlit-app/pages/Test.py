@@ -42,8 +42,10 @@ if st.button("Predict"):
     with st.spinner(text='In progress'):
         sleep(0.5)
         prediction = send_client_request(sc)
+
         data = prediction.response.get("data")
         meta = prediction.response.get("meta")
+        st.json(prediction.response)
         result = data.get("ndarray")
         tag = meta.get("tags")
         metrics = meta.get("metrics")

@@ -67,16 +67,9 @@ make port
 make port-grafana
 ```
 
-## Testing
-```bash
-curl -X POST -H 'Content-Type: application/json' \
-    -d '{"data": { "ndarray": ["This is a nice comment."]}}' \
-    http://localhost:8080/seldon/seldon/abtest/api/v1.0/predictions
-```
-
 ## Start Streamlit App
 ```shell
-make run-streamlit
+make streamlit
 ```
 
 ## References
@@ -87,3 +80,4 @@ make run-streamlit
   * Install seldon-core operator: https://docs.seldon.io/projects/seldon-core/en/latest/workflow/install.html
 * Seldon-core-analytics installation: https://docs.seldon.io/projects/seldon-core/en/latest/charts/seldon-core-analytics.html
 * Custom metrics: https://docs.seldon.io/projects/seldon-core/en/latest/examples/runtime_metrics_tags.html
+* Streamlit: https://docs.streamlit.io/library/cheatsheet

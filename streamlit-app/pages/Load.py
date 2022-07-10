@@ -131,7 +131,7 @@ sc = SeldonClient(
 )
 
 if load_predict_button:
-    placeholder_sending.warning("Sending many requests...")
+    placeholder_sending.warning("🧘‍ Reaching Nirvana...")
     init_session_state()
 
     test_data = get_test_data()
