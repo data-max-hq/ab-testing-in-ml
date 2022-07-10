@@ -29,16 +29,14 @@ def update_metrics_b():
     placeholder_model_b_latest.metric("Latest response time", st.session_state.model_b_latest)
 
 
-if 'model_a_count' not in st.session_state:
+def init_session_state():
     st.session_state.model_a_count = 0
-if 'model_a_latest' not in st.session_state:
     st.session_state.model_a_latest = 0
-
-if 'model_b_count' not in st.session_state:
     st.session_state.model_b_count = 0
-if 'model_b_latest' not in st.session_state:
     st.session_state.model_b_latest = 0
 
+
+init_session_state()
 load_predict_button = st.button("Predict")
 st.text("\n")
 
@@ -134,10 +132,7 @@ sc = SeldonClient(
 
 if load_predict_button:
     placeholder_sending.warning("Sending many requests...")
-    st.session_state.model_a_count = 0
-    st.session_state.model_a_latest = 0
-    st.session_state.model_b_count = 0
-    st.session_state.model_b_latest = 0
+    init_session_state()
 
     test_data = get_test_data()
     send_predictions(test_data[:10])
