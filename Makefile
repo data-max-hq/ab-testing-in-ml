@@ -35,7 +35,7 @@ seldon-core-analytics:
 port-grafana:
 	kubectl port-forward svc/seldon-core-analytics-grafana -n seldon-system 3000:80
 
-build:
+build:  # gcloud builds
 	docker build -t ab-test:a -f Dockerfile.a .
 	docker build -t ab-test:b -f Dockerfile.b .
 

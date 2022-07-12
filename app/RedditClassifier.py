@@ -40,7 +40,7 @@ class RedditClassifier(object):
         # Artificial sleep delay added only for version A
         if self._version == "A":
             sleep_time = random.uniform(0.1, 1.0)
-            logging.info(f"Version {self._version} waiting for {sleep_time} sec.")
+            logging.info(f"Version {self._version} waiting for {str(round(sleep_time, 2))} sec.")
             sleep(sleep_time)
         end_time = datetime.datetime.now()
         time_diff = (end_time - start_time)

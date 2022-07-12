@@ -15,7 +15,7 @@ This repository uses Kubernetes, helm, ambassador, seldon-core, and seldon-core-
 brew install helm
 ```
 
-2. Create a Kubernetes cluster. For local clusters, one can use `minikube`, `kind`, or `k3s`. In case you are using `minikube`:
+2. Create a Kubernetes cluster: AKS, EKS, GKE or local cluster. For local clusters, one can use `minikube`, `kind`, or `k3s`. In case you are using `minikube`:
 ```bash
 make minikube
 ```
