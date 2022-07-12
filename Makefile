@@ -17,6 +17,9 @@ ambassador:
 port:
 	kubectl port-forward svc/ambassador -n ambassador 8080:80
 
+port-admin:
+	kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
+
 seldon-core:
 	helm upgrade --install seldon-core seldon-core-operator \
       --repo https://storage.googleapis.com/seldon-charts \
