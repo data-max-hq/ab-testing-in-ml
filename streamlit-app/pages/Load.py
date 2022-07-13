@@ -139,7 +139,7 @@ if load_predict_button:
     init_session_state()
 
     test_data = get_test_data()
-    send_predictions(test_data[:10])
+    send_predictions(test_data[:100])
 
     placeholder_sending.text("")
     st.success(f"🧘‍ Finished.")
