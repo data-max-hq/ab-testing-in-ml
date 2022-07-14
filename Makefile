@@ -23,15 +23,14 @@ port-admin:
 seldon-core:
 	helm upgrade --install seldon-core seldon-core-operator \
       --repo https://storage.googleapis.com/seldon-charts \
-	  --set usageMetrics.enabled=false \
-	  --set ambassador.enabled=true \
+	  --values ./charts/seldon-core/values.local.yaml \
 	  --create-namespace \
 	  --namespace seldon-system
 
 seldon-core-analytics:
 	helm upgrade --install seldon-core-analytics seldon-core-analytics \
        --repo https://storage.googleapis.com/seldon-charts \
-       --set grafana.adminPassword="admin" \
+       --values ./charts/seldon-core-analytics/values.local.yaml \
        --create-namespace \
        --namespace seldon-system
 
@@ -66,3 +65,9 @@ uninstall:
 
 delete:
 	minikube delete
+
+helm-diff:
+	helm plugin install https://github.com/databus23/helm-diff
+
+helmfile:
+	helmfile apply

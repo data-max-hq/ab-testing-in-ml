@@ -4,7 +4,6 @@ metadata:
   labels:
     app: seldon
   name: "{{ .Release.Name }}"
-  namespace: seldon
 spec:
   name: "{{ .Release.Name }}"
   annotations:
