@@ -69,5 +69,5 @@ delete:
 helm-diff:
 	helm plugin install https://github.com/databus23/helm-diff
 
-helmfile:
+helm-file:
 	helmfile apply
