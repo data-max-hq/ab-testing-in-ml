@@ -1,0 +1,5 @@
+replicas: 1
+
+app:
+  image: streamlit-app
+  tag: v1.0

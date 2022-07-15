@@ -21,7 +21,7 @@ def send_client_request(seldon_client):
 sc = SeldonClient(
     gateway="ambassador",
     transport="rest",
-    gateway_endpoint="localhost:8080",
+    gateway_endpoint="ambassador.ambassador.svc",
     namespace="seldon",
 )
 

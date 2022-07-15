@@ -1,0 +1,11 @@
+apiVersion: v2
+name: streamlit-app
+description: Chart to deploy a Streamlit app
+version: 1.0.0
+
+sources:
+  - https://github.com/data-max-hq/ab-testing-in-ml
+  - https://github.com/streamlit/streamlit
+keywords:
+  - kubernetes
+  - machine-learning

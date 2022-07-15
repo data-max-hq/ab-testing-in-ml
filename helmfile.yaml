@@ -14,24 +14,34 @@ releases:
     values:
       - "./charts/ambassador/values.ambassador.local.yaml"
     needs:
-    - seldon-system/seldon-core
-  - name: seldon-core-analytics
-    namespace: seldon-system
-    createNamespace: true
-    chart: seldon/seldon-core-analytics
-    values:
-      - "./charts/seldon-core/values.local.yaml"
-    needs:
-    - seldon-system/seldon-core
+      - seldon-system/seldon-core
   - name: seldon-core
     namespace: seldon-system
     createNamespace: true
     chart: seldon/seldon-core-operator
     values:
       - "./charts/seldon-core/values.local.yaml"
-  - name: abtest
-    namespace: seldon
+  - name: seldon-core-analytics
+    namespace: seldon-system
     createNamespace: true
-    chart: charts/abtest
+    chart: seldon/seldon-core-analytics
     values:
-      - "./charts/abtest/values.yaml"
+      - "./charts/seldon-core-analytics/values.local.yaml"
+    needs:
+      - ambassador/ambassador
+#  - name: abtest
+#    namespace: seldon
+#    createNamespace: true
+#    chart: charts/abtest
+#    values:
+#      - "./charts/abtest/values.yaml"
+#    needs:
+#    - app/streamlit-app
+  - name: streamlit-app
+    namespace: app
+    createNamespace: true
+    chart: charts/streamlit-app
+    values:
+      - "./charts/streamlit-app/values.yaml"
+    needs:
+      - seldon-system/seldon-core-analytics
