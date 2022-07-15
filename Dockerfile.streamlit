@@ -10,4 +10,6 @@ RUN pip3 install -r requirements.txt
 COPY ./streamlit-app .
 COPY ./resources ./resources
 
+ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS false
+
 CMD streamlit run App.py
