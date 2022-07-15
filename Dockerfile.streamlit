@@ -8,6 +8,6 @@ COPY ./streamlit-app/requirements.txt ./requirements.txt
 RUN pip3 install -r requirements.txt
 
 COPY ./streamlit-app .
-COPY ./resources .
+COPY ./resources ./resources
 
 CMD streamlit run App.py

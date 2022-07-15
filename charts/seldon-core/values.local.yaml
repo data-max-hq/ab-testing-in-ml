@@ -3,3 +3,6 @@ usageMetrics:
 
 ambassador:
   enabled: true
+
+certManager:
+  enabled: false

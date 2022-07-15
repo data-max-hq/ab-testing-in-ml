@@ -20,6 +20,9 @@ port:
 port-admin:
 	kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
 
+port-streamlit:
+	kubectl port-forward svc/streamlit-app -n app 8501:8501
+
 seldon-core:
 	helm upgrade --install seldon-core seldon-core-operator \
       --repo https://storage.googleapis.com/seldon-charts \
@@ -40,14 +43,14 @@ port-grafana:
 build:  # gcloud builds
 	docker build -t ab-test:a -f Dockerfile.a .
 	docker build -t ab-test:b -f Dockerfile.b .
-	docker build -t streamlit-app:v1.0 -f Dockerfile.streamlit .
+	docker build -t streamlit-app:v1.1 -f Dockerfile.streamlit .
 
 load:
 	minikube image load ab-test:a
 	minikube image load ab-test:b
 
 streamlit-load:
-	minikube image load streamlit-app:v1.0
+	minikube image load streamlit-app:v1.1
 
 abtest:
 	helm upgrade --install abtest ./charts/abtest \
