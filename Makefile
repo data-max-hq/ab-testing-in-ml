@@ -56,6 +56,10 @@ abtest:
 	helm upgrade --install abtest ./charts/abtest \
 		--create-namespace --namespace seldon
 
+streamlit:
+	helm upgrade --install streamlit-app ./charts/streamlit-app \
+		--create-namespace --namespace app
+
 curl:
 	curl -X POST -H 'Content-Type: application/json' \
 		-d '{"data": { "ndarray": ["This is a nice comment."]}}' \
@@ -63,9 +67,9 @@ curl:
 
 run:
 	python seldon_client/client.py
-
-streamlit:
-	streamlit run streamlit-app/App.py
+#
+#streamlit:
+#	streamlit run streamlit-app/App.py
 
 uninstall:
 	helm uninstall abtest --namespace seldon
