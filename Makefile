@@ -1,4 +1,5 @@
 all: minikube seldon-core seldon-core-analytics ambassador build load abtest port
+install-all: ambassador seldon-core seldon-core-analytics streamlit
 
 minikube:
 	minikube start --driver=docker --kubernetes-version=v1.21.6
@@ -48,6 +49,7 @@ build:  # gcloud builds
 load:
 	minikube image load ab-test:a
 	minikube image load ab-test:b
+	minikube image load streamlit-app:v1.1
 
 streamlit-load:
 	minikube image load streamlit-app:v1.1
@@ -71,8 +73,27 @@ run:
 #streamlit:
 #	STREAMLIT_BROWSER_GATHER_USAGE_STATS=false streamlit run streamlit-app/App.py
 
-uninstall:
+uninstall-streamlit:
+	helm uninstall streamlit-app --namespace app
+
+uninstall-abtest:
 	helm uninstall abtest --namespace seldon
+
+uninstall-seldon-core-analytics:
+	helm uninstall seldon-core-analytics --namespace seldon-system
+
+uninstall-seldon-core:
+	helm uninstall seldon-core-analytics --namespace seldon-system
+
+uninstall-ambassador:
+	helm uninstall ambassador --namespace ambassador
+
+uninstall-all:
+	helm uninstall streamlit-app --namespace app
+	helm uninstall abtest --namespace seldon
+	helm uninstall seldon-core-analytics --namespace seldon-system
+	helm uninstall seldon-core --namespace seldon-system
+	helm uninstall ambassador --namespace ambassador
 
 delete:
 	minikube delete
