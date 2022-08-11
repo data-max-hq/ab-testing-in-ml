@@ -45,7 +45,7 @@ class RedditClassifier(object):
         end_time = datetime.datetime.now()
         time_diff = (end_time - start_time)
         # Get run time in ms
-        self._run_time = time_diff.total_seconds() * 1000
+        self._run_time = int(time_diff.total_seconds() * 1000)
 
         return predictions
 

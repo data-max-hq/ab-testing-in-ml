@@ -1,5 +1,6 @@
 all: minikube seldon-core seldon-core-analytics ambassador build load abtest port
 install-all: ambassador seldon-core seldon-core-analytics streamlit
+uninstall-all: uninstall-streamlit uninstall-abtest uninstall-seldon-core-analytics uninstall-seldon-core uninstall-ambassador
 
 minikube:
 	minikube start --driver=docker --kubernetes-version=v1.21.6
@@ -54,6 +55,9 @@ load:
 streamlit-load:
 	minikube image load streamlit-app:v1.1
 
+sleep:
+	sleep 10
+
 abtest:
 	helm upgrade --install abtest ./charts/abtest \
 		--create-namespace --namespace seldon
@@ -86,13 +90,6 @@ uninstall-seldon-core:
 	helm uninstall seldon-core-analytics --namespace seldon-system
 
 uninstall-ambassador:
-	helm uninstall ambassador --namespace ambassador
-
-uninstall-all:
-	helm uninstall streamlit-app --namespace app
-	helm uninstall abtest --namespace seldon
-	helm uninstall seldon-core-analytics --namespace seldon-system
-	helm uninstall seldon-core --namespace seldon-system
 	helm uninstall ambassador --namespace ambassador
 
 delete:
