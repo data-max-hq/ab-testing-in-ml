@@ -37,7 +37,7 @@ class RedditClassifier(object):
         tfidf_features = self._tfidf_vectorizer.transform(spacy_tokens)
         predictions = self._lr_model.predict_proba(tfidf_features)
 
-        # Artificial sleep delay added only for version A
+        # Artificial delay added only for version A with a random sleep time
         if self._version == "A":
             sleep_time = random.uniform(0.1, 1.0)
             logging.info(f"Version {self._version} waiting for {str(round(sleep_time, 2))} sec.")

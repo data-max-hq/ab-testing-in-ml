@@ -87,7 +87,7 @@ uninstall-seldon-core-analytics:
 	helm uninstall seldon-core-analytics --namespace seldon-system
 
 uninstall-seldon-core:
-	helm uninstall seldon-core-analytics --namespace seldon-system
+	helm uninstall seldon-core --namespace seldon-system
 
 uninstall-ambassador:
 	helm uninstall ambassador --namespace ambassador
