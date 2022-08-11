@@ -8,6 +8,15 @@ minikube:
 train:
 	python train_models.py
 
+emissary:
+	#helm repo add datawire https://app.getambassador.io
+	#helm repo update
+	kubectl apply -f https://app.getambassador.io/yaml/emissary/2.3.2/emissary-crds.yaml
+	kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
+	helm  upgrade --install -n emissary --create-namespace emissary-ingress datawire/emissary-ingress \
+		--values ./charts/emissary/values.emissary.local.yaml  && \
+	kubectl rollout status  -n emissary deployment/emissary-ingress -w
+
 ambassador:
 	helm repo add datawire https://www.getambassador.io
 	helm upgrade --install ambassador datawire/ambassador \

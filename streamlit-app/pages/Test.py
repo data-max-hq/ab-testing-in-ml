@@ -3,6 +3,8 @@ from time import sleep
 import numpy as np
 import streamlit as st
 
+from Constants import Constants
+
 from seldon_core.seldon_client import SeldonClient
 
 
@@ -25,7 +27,7 @@ sc = SeldonClient(
     namespace="seldon",
 )
 
-st.sidebar.image("./resources/logo.png", use_column_width=True)
+st.sidebar.image(Constants.LOGO_IMAGE, use_column_width=True)
 st.title("Practical guide to A/B Testing for ML applications")
 st.markdown("***")
 st.markdown(

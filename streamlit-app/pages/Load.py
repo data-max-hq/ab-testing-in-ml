@@ -5,10 +5,12 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
+from Constants import Constants
+
 from sklearn.model_selection import train_test_split
 from seldon_core.seldon_client import SeldonClient
 
-st.sidebar.image("./resources/logo.png", use_column_width=True)
+st.sidebar.image(Constants.LOGO_IMAGE, use_column_width=True)
 st.title("Practical guide to A/B Testing for ML applications")
 st.markdown("***")
 
@@ -139,7 +141,7 @@ if load_predict_button:
     init_session_state()
 
     test_data = get_test_data()
-    send_predictions(test_data[:100])
+    send_predictions(test_data[:200])
 
     placeholder_sending.text("")
     st.success(f"🧘‍ Finished.")
