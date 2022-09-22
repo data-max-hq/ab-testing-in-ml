@@ -1,9 +1,6 @@
 steps:
-  - name: "gcr.io/cloud-builders/docker"
+  - name: "gcr.io/kaniko-project/executor:latest"
     args:
-      - build
-      - "--tag=eu.gcr.io/unified-firefly-174009/abtest-demo/ab-test:a"
-      - "--file=./Dockerfile.a"
-      - .
-images:
-  - "eu.gcr.io/unified-firefly-174009/abtest-demo/ab-test:a"
+      - --dockerfile=Dockerfile.a
+      - --destination=eu.gcr.io/unified-firefly-174009/abtest-demo/ab-test:a
+      - --cache=true

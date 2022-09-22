@@ -1,9 +1,6 @@
 steps:
-  - name: "gcr.io/cloud-builders/docker"
+  - name: "gcr.io/kaniko-project/executor:latest"
     args:
-      - build
-      - "--tag=eu.gcr.io/unified-firefly-174009/abtest-demo/streamlit-app:1.0.0"
-      - "--file=./Dockerfile.streamlit"
-      - .
-images:
-  - "eu.gcr.io/unified-firefly-174009/abtest-demo/streamlit-app:1.0.0"
+      - --dockerfile=Dockerfile.streamlit
+      - --destination=eu.gcr.io/unified-firefly-174009/abtest-demo/streamlit-app:1.0.0
+      - --cache=true
