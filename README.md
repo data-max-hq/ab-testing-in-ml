@@ -93,7 +93,7 @@ make streamlit
 
 ## References
 
-* Training: https://github.com/SeldonIO/seldon-core/tree/master/examples/models/sklearn_spacy_text
+* Model Training: https://github.com/SeldonIO/seldon-core/tree/master/examples/models/sklearn_spacy_text
 * Seldon-core installation: 
   * Install Ambassador: https://docs.seldon.io/projects/seldon-core/en/latest/ingress/ambassador.html
   * Install seldon-core operator: https://docs.seldon.io/projects/seldon-core/en/latest/workflow/install.html
