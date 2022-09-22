@@ -114,3 +114,6 @@ submit-images:
 	gcloud builds submit --config cloudbuild-modela.yaml
 	gcloud builds submit --config cloudbuild-modelb.yaml
 	gcloud builds submit --config cloudbuild-streamlit.yaml
+
+streamlit-image:
+	gcloud builds submit --config cloudbuild-streamlit.yaml

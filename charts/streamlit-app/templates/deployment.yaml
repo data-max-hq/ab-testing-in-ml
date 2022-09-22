@@ -16,7 +16,7 @@ spec:
       containers:
         - name: {{ .Release.Name }}-app
           image: {{ .Values.app.image }}:{{ .Values.app.tag }}
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - name: streamlit
               containerPort: 8501
