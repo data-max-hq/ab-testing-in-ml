@@ -15,20 +15,39 @@ This repository uses Kubernetes, helm, ambassador, seldon-core, and seldon-core-
 brew install helm
 ```
 
-2. Create a Kubernetes cluster: AKS, EKS, GKE or local cluster. For local clusters, one can use `minikube`, `kind`, or `k3s`. In case you are using `minikube`:
-```bash
-make minikube
-```
+2. Create a Kubernetes cluster: AKS, EKS, GKE or local cluster. For local clusters, one can use `minikube`, `kind`, or `k3s`. For instance:
+   1. Minikube
+    ```bash
+    make minikube
+    ```
+   2. GKE
+   ```shell
+    gcloud container clusters create demo-cluster-ab-test \
+      --zone=europe-west3-a \
+      --cluster-version=1.21.14-gke.5300 --no-enable-autoupgrade \
+      --machine-type=e2-highcpu-4
+   ```
 
 ### Train model
-Prepare the model artifacts
+Prepare the model artifacts:
 ```
 make train
 ```
 
 ### Build container images
+One can build the images locally, or use Cloud Submit:
+#### Locally
 ```
-make build
+docker build -t ab-test:a -f Dockerfile.a .
+docker build -t ab-test:b -f Dockerfile.b .
+docker build -t streamlit-app:v1.1 -f Dockerfile.streamlit .
+```
+
+#### Cloud Submit
+```shell
+gcloud builds submit --config cloudbuild-modela.yaml
+gcloud builds submit --config cloudbuild-modelb.yaml
+gcloud builds submit --config cloudbuild-streamlit.yaml
 ```
 
 ### (minikube only) Load models on minikube's registry
