@@ -111,6 +111,6 @@ helm-file:
 	helmfile apply --concurrency 1
 
 submit-images:
-	gcloud builds submit --config cloudbuild-streamlit.yaml
 	gcloud builds submit --config cloudbuild-modela.yaml
 	gcloud builds submit --config cloudbuild-modelb.yaml
+	gcloud builds submit --config cloudbuild-streamlit.yaml

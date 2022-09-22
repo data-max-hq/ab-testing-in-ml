@@ -2,8 +2,8 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args:
       - build
-      - "--tag=eu.gcr.io/unified-firefly-174009/abtest-demo/model-b:1.0.0"
-      - "--file=./Dockerfile.a"
+      - "--tag=eu.gcr.io/unified-firefly-174009/abtest-demo/ab-test:b"
+      - "--file=./Dockerfile.b"
       - .
 images:
-  - "eu.gcr.io/unified-firefly-174009/abtest-demo/model-b:1.0.0"
+  - "eu.gcr.io/unified-firefly-174009/abtest-demo/ab-test:b"
