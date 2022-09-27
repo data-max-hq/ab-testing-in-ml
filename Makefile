@@ -27,10 +27,10 @@ port-streamlit:
 
 seldon-core:
 	helm upgrade --install seldon-core seldon-core-operator \
-      --repo https://storage.googleapis.com/seldon-charts \
-	  --values ./charts/seldon-core/values.local.yaml \
-	  --create-namespace \
-	  --namespace seldon-system
+		--repo https://storage.googleapis.com/seldon-charts \
+		--values ./charts/seldon-core/values.local.yaml \
+		--create-namespace \
+		--namespace seldon-system
 
 seldon-core-analytics:
 	helm upgrade --install seldon-core-analytics seldon-core-analytics \
