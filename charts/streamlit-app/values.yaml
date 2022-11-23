@@ -1,5 +1,5 @@
 replicas: 1
 
 app:
-  image: eu.gcr.io/unified-firefly-174009/abtest-demo/streamlit-app
+  image: eu.gcr.io/sustained-drake-368613/abtest-demo/streamlit-app
   tag: 1.0.0

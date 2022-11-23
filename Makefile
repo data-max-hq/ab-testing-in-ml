@@ -30,6 +30,7 @@ seldon-core:
 		--repo https://storage.googleapis.com/seldon-charts \
 		--values ./charts/seldon-core/values.local.yaml \
 		--create-namespace \
+		--version 1.14.0 \
 		--namespace seldon-system
 
 seldon-core-analytics:
@@ -37,6 +38,7 @@ seldon-core-analytics:
        --repo https://storage.googleapis.com/seldon-charts \
        --values ./charts/seldon-core-analytics/values.local.yaml \
        --create-namespace \
+       --version 1.14.0 \
        --namespace seldon-system
 
 port-grafana:

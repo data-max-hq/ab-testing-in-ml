@@ -1,13 +1,13 @@
 separate_pods: true
 model_a:
   image:
-    name: eu.gcr.io/unified-firefly-174009/abtest-demo/ab-test
+    name: eu.gcr.io/sustained-drake-368613/abtest-demo/ab-test
     version: a
   name: classifier-a
 #  resources: { "requests": { "memory": "1Mi" }}
 model_b:
   image:
-    name: eu.gcr.io/unified-firefly-174009/abtest-demo/ab-test
+    name: eu.gcr.io/sustained-drake-368613/abtest-demo/ab-test
     version: b
   name: classifier-b
 replicas: 1
