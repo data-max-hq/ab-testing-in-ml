@@ -8,6 +8,14 @@ minikube:
 train:
 	python train_models.py
 
+emissary:
+	kubectl apply -f https://app.getambassador.io/yaml/emissary/3.3.1/emissary-crds.yaml
+	kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
+	helm install -n emissary --create-namespace \
+         emissary-ingress datawire/emissary-ingress \
+         --values ./charts/emissary/values.emissary.local.yaml && \
+	kubectl rollout status  -n emissary deployment/emissary-ingress -w
+
 ambassador:
 	helm repo add datawire https://www.getambassador.io
 	helm upgrade --install ambassador datawire/ambassador \
@@ -30,15 +38,15 @@ seldon-core:
 		--repo https://storage.googleapis.com/seldon-charts \
 		--values ./charts/seldon-core/values.local.yaml \
 		--create-namespace \
-		--version 1.14.0 \
+		--version 1.15.0 \
 		--namespace seldon-system
 
 seldon-core-analytics:
-	helm upgrade --install seldon-core-analytics seldon-core-analytics \
-       --repo https://storage.googleapis.com/seldon-charts \
+	# helm repo add seldonio https://storage.googleapis.com/seldon-charts
+	helm upgrade --install seldon-core-analytics seldonio/seldon-core-analytics \
        --values ./charts/seldon-core-analytics/values.local.yaml \
        --create-namespace \
-       --version 1.14.0 \
+       --version 1.15.0 \
        --namespace seldon-system
 
 port-grafana:
