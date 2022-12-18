@@ -132,7 +132,7 @@ def send_predictions(x_test):
 sc = SeldonClient(
     gateway="ambassador",
     transport="rest",
-    gateway_endpoint="ambassador.ambassador.svc",
+    gateway_endpoint="emissary-ingress.emissary.svc",
     namespace="seldon",
 )
 

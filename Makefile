@@ -11,18 +11,18 @@ train:
 emissary:
 	kubectl apply -f https://app.getambassador.io/yaml/emissary/3.3.1/emissary-crds.yaml
 	kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
-	helm install -n emissary --create-namespace \
+	helm upgrade --install --namespace emissary --create-namespace \
          emissary-ingress datawire/emissary-ingress \
          --values ./charts/emissary/values.emissary.local.yaml && \
 	kubectl rollout status  -n emissary deployment/emissary-ingress -w
 
-ambassador:
-	helm repo add datawire https://www.getambassador.io
-	helm upgrade --install ambassador datawire/ambassador \
-      --set image.repository=docker.io/datawire/ambassador \
-      --values ./charts/ambassador/values.ambassador.local.yaml \
-      --create-namespace \
-      --namespace ambassador
+#ambassador:
+#	helm repo add  datawire https://www.getambassador.io
+#	helm upgrade --install ambassador datawire/ambassador \
+#      --set image.repository=docker.io/datawire/ambassador \
+#      --values ./charts/ambassador/values.ambassador.local.yaml \
+#      --create-namespace \
+#      --namespace ambassador
 
 port:
 	kubectl port-forward svc/ambassador -n ambassador 8080:80
