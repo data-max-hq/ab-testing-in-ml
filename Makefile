@@ -1,6 +1,5 @@
-all: minikube seldon-core seldon-core-analytics ambassador build load abtest port
-install-all: ambassador seldon-core seldon-core-analytics streamlit
-uninstall-all: uninstall-streamlit uninstall-abtest uninstall-seldon-core-analytics uninstall-seldon-core uninstall-ambassador
+install-all: emissary seldon-core prometheus grafana streamlit
+uninstall-all: uninstall-streamlit uninstall-abtest uninstall-grafana uninstall-prometheus uninstall-seldon-core uninstall-emissary
 
 minikube:
 	minikube start --driver=docker --kubernetes-version=v1.21.6
@@ -23,12 +22,12 @@ emissary:
 #      --values ./charts/ambassador/values.ambassador.local.yaml \
 #      --create-namespace \
 #      --namespace ambassador
-
-port:
-	kubectl port-forward svc/ambassador -n ambassador 8080:80
-
-port-admin:
-	kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
+#
+#port:
+#	kubectl port-forward svc/ambassador -n ambassador 8080:80
+#
+#port-admin:
+#	kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
 
 port-streamlit:
 	kubectl port-forward svc/streamlit-app -n app 8501:8501
@@ -42,17 +41,17 @@ seldon-core:
 		--namespace seldon-system
 
 # Deprecated
-seldon-core-analytics:
-	# helm repo add seldonio https://storage.googleapis.com/seldon-charts
-	helm upgrade --install seldon-core-analytics seldonio/seldon-core-analytics \
-       --values ./charts/seldon-core-analytics/values.local.yaml \
-       --create-namespace \
-       --version 1.15.0 \
-       --namespace seldon-system
+#seldon-core-analytics:
+#	# helm repo add seldonio https://storage.googleapis.com/seldon-charts
+#	helm upgrade --install seldon-core-analytics seldonio/seldon-core-analytics \
+#       --values ./charts/seldon-core-analytics/values.local.yaml \
+#       --create-namespace \
+#       --version 1.15.0 \
+#       --namespace seldon-system
 
 prometheus:
 	# helm repo add bitnami https://charts.bitnami.com/bitnami
-	helm upgrade --install seldon-monitoring bitnami/kube-prometheus \
+	helm upgrade --install prometheus-seldon-monitoring bitnami/kube-prometheus \
 		--version 8.2.2 \
 		--values ./charts/prometheus/values.prometheus.local.yaml \
 		--namespace seldon-monitoring \
@@ -110,15 +109,24 @@ uninstall-streamlit:
 
 uninstall-abtest:
 	helm uninstall abtest --namespace seldon
-
-uninstall-seldon-core-analytics:
-	helm uninstall seldon-core-analytics --namespace seldon-system
+#
+#uninstall-seldon-core-analytics:
+#	helm uninstall seldon-core-analytics --namespace seldon-system
 
 uninstall-seldon-core:
 	helm uninstall seldon-core --namespace seldon-system
 
-uninstall-ambassador:
-	helm uninstall ambassador --namespace ambassador
+#uninstall-ambassador:
+#	helm uninstall ambassador --namespace ambassador
+
+uninstall-emissary:
+	helm uninstall emissary-ingress --namespace emissary
+
+uninstall-prometheus:
+	helm uninstall prometheus-seldon-monitoring --namespace seldon-monitoring
+
+uninstall-grafana:
+	helm uninstall grafana-seldon-monitoring --namespace seldon-monitoring
 
 delete:
 	minikube delete
