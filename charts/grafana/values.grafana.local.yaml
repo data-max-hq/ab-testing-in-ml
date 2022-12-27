@@ -1,0 +1,8 @@
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://seldon-monitoring-prometheus.seldon-monitoring.svc.cluster.local:9090
+        isDefault: true

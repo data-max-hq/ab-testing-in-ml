@@ -3,5 +3,6 @@ service:
 
 replicaCount: 1
 
+createDefaultListeners: true
 #crds:
 #  keep: false

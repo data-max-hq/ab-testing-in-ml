@@ -1,2 +1,3 @@
 /.idea/
 /.venv/
+/charts/grafana/values.grafana.secret.yaml
