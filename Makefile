@@ -41,6 +41,7 @@ seldon-core:
 		--version 1.15.0 \
 		--namespace seldon-system
 
+# Deprecated
 seldon-core-analytics:
 	# helm repo add seldonio https://storage.googleapis.com/seldon-charts
 	helm upgrade --install seldon-core-analytics seldonio/seldon-core-analytics \
@@ -49,8 +50,28 @@ seldon-core-analytics:
        --version 1.15.0 \
        --namespace seldon-system
 
+prometheus:
+	# helm repo add bitnami https://charts.bitnami.com/bitnami
+	helm upgrade --install seldon-monitoring bitnami/kube-prometheus \
+		--version 8.2.2 \
+		--values ./charts/prometheus/values.prometheus.local.yaml \
+		--namespace seldon-monitoring \
+		--create-namespace
+
+grafana:
+	# helm repo add grafana https://grafana.github.io/helm-charts
+	helm upgrade --install grafana-seldon-monitoring grafana/grafana \
+		--version 6.48.0 \
+		--values ./charts/grafana/values.grafana.local.yaml \
+		--values ./charts/grafana/values.grafana.secret.yaml \
+		--namespace seldon-monitoring \
+		--create-namespace
+
+podmonitor:
+	kubectl apply -f seldon-podmonitor.yaml
+
 port-grafana:
-	kubectl port-forward svc/seldon-core-analytics-grafana -n seldon-system 3000:80
+	kubectl port-forward svc/grafana-seldon-monitoring -n seldon-monitoring 3000:80
 
 build:  # gcloud builds
 	docker build -t ab-test:a -f Dockerfile.a .
