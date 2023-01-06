@@ -91,6 +91,12 @@ make port-grafana
 make streamlit
 ```
 
+## Contact
+
+Sadik Bakiu (sadik [at] data-max.io)
+
+Developed with ❤ at [Data Max](https://www.data-max.io/)
+
 ## References
 
 * Model Training: https://github.com/SeldonIO/seldon-core/tree/master/examples/models/sklearn_spacy_text
