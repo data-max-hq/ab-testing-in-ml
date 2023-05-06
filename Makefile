@@ -17,39 +17,19 @@ emissary:
          --values ./charts/emissary/values.emissary.local.yaml && \
 	kubectl rollout status  -n emissary deployment/emissary-ingress -w
 
-#ambassador:
-#	helm repo add  datawire https://www.getambassador.io
-#	helm upgrade --install ambassador datawire/ambassador \
-#      --set image.repository=docker.io/datawire/ambassador \
-#      --values ./charts/ambassador/values.ambassador.local.yaml \
-#      --create-namespace \
-#      --namespace ambassador
-#
-#port:
-#	kubectl port-forward svc/ambassador -n ambassador 8080:80
-#
-#port-admin:
-#	kubectl port-forward svc/ambassador-admin -n ambassador 8877:8877
-
 port-streamlit:
 	kubectl port-forward svc/streamlit-app -n app 8501:8501
 
 seldon-core:
-	helm upgrade --install seldon-core seldon-core-operator \
-		--repo https://storage.googleapis.com/seldon-charts \
+	#	helm repo add seldonio https://storage.googleapis.com/seldon-charts
+	#	helm repo update
+	helm upgrade --install seldon-core seldonio/seldon-core-operator \
 		--values ./charts/seldon-core/values.local.yaml \
 		--create-namespace \
-		--version 1.15.0 \
+		--version 1.16.0 \
 		--namespace seldon-system
 
-# Deprecated
-#seldon-core-analytics:
-#	# helm repo add seldonio https://storage.googleapis.com/seldon-charts
-#	helm upgrade --install seldon-core-analytics seldonio/seldon-core-analytics \
-#       --values ./charts/seldon-core-analytics/values.local.yaml \
-#       --create-namespace \
-#       --version 1.15.0 \
-#       --namespace seldon-system
+seldon-core:
 
 prometheus:
 	# helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -73,19 +53,6 @@ podmonitor:
 
 port-grafana:
 	kubectl port-forward svc/grafana-seldon-monitoring -n seldon-monitoring 3000:80
-
-#build:  # gcloud builds
-#	docker build -t ab-test:a -f Dockerfile.a .
-#	docker build -t ab-test:b -f Dockerfile.b .
-#	docker build -t streamlit-app:v1.1 -f Dockerfile.streamlit .
-
-#load:
-#	minikube image load ab-test:a
-#	minikube image load ab-test:b
-#	minikube image load streamlit-app:v1.1
-
-#streamlit-load:
-#	minikube image load streamlit-app:v1.1
 
 sleep:
 	sleep 10
@@ -111,15 +78,9 @@ uninstall-streamlit:
 
 uninstall-abtest:
 	helm uninstall abtest --namespace seldon
-#
-#uninstall-seldon-core-analytics:
-#	helm uninstall seldon-core-analytics --namespace seldon-system
 
 uninstall-seldon-core:
 	helm uninstall seldon-core --namespace seldon-system
-
-#uninstall-ambassador:
-#	helm uninstall ambassador --namespace ambassador
 
 uninstall-emissary:
 	helm uninstall emissary-ingress --namespace emissary

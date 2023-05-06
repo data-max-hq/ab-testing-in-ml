@@ -2,4 +2,4 @@ replicas: 1
 
 app:
   image: europe-west3-docker.pkg.dev/sustained-drake-368613/ab-testing/streamlit-app
-  tag: 1.0.1
+  tag: 1.0.0

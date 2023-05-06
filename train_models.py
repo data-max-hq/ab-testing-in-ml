@@ -28,9 +28,11 @@ def train():
     TOKEN_COLUMN = "token_body"
 
     # Downloading the 50k reddit dataset of moderated comments
+    # Link to dataset
+    # https://raw.githubusercontent.com/axsauze/reddit-classification-exploration/master/data/reddit_train.csv
     logging.info("Read reddit training dataset.")
     df = pd.read_csv(
-        "https://raw.githubusercontent.com/axsauze/reddit-classification-exploration/master/data/reddit_train.csv",
+        "data/reddit_train.csv",
         names=df_cols,
         skiprows=1,
         encoding="ISO-8859-1",
@@ -95,7 +97,7 @@ classifier = RedditClassifier(models_dir="models")
 df_cols = ["prev_idx", "parent_idx", "body", "removed"]
 
 df = pd.read_csv(
-    "https://raw.githubusercontent.com/axsauze/reddit-classification-exploration/master/data/reddit_train.csv",
+    "data/reddit_train.csv",
     names=df_cols,
     skiprows=1,
     encoding="ISO-8859-1",
