@@ -81,7 +81,7 @@ update_metrics_a()
 update_metrics_b()
 
 
-@st.experimental_memo
+@st.cache_data
 def get_test_data():
     df_cols = ["prev_idx", "parent_idx", "body", "removed"]
 

@@ -3,8 +3,9 @@ import re
 import numpy as np
 from sklearn.base import TransformerMixin
 from html.parser import HTMLParser
+from html import unescape
 
-nlp = spacy.load("en_core_web_sm", disable=['ner'])
+nlp = spacy.load("en_core_web_sm", disable=["ner"])
 
 
 class SpacyTokenTransformer(TransformerMixin):
@@ -56,7 +57,8 @@ class CleanTextTransformer(TransformerMixin):
             decoded = raw_text.encode("ISO-8859-1").decode("utf-8")
         except:
             decoded = raw_text.encode("ISO-8859-1").decode("cp1252")
-        html_unescaped = CleanTextTransformer.__html_parser.unescape(decoded)
+        # html_unescaped = CleanTextTransformer.__html_parser.unescape(decoded)
+        html_unescaped = unescape(decoded)
         html_unescaped = re.sub(r"\r\n", " ", html_unescaped)
         html_unescaped = re.sub(r"\r\r\n", " ", html_unescaped)
         html_unescaped = re.sub(r"\r", " ", html_unescaped)

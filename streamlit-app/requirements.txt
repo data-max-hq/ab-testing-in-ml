@@ -1,4 +1,4 @@
-streamlit==1.11.0
-seldon-core==1.14.0
-scikit-learn==1.1.1
-pandas==1.2.1
+streamlit
+seldon-core==1.16.0
+scikit-learn==1.2.2
+pandas==2.0.1

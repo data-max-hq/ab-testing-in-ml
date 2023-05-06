@@ -1,6 +1,0 @@
-steps:
-  - name: "gcr.io/kaniko-project/executor:latest"
-    args:
-      - --dockerfile=Dockerfile.streamlit
-      - --destination=eu.gcr.io/$PROJECT_ID/abtest-demo/streamlit-app:1.0.0
-      - --cache=true

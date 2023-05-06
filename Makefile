@@ -1,14 +1,16 @@
 install-all: emissary seldon-core prometheus grafana streamlit
 uninstall-all: uninstall-streamlit uninstall-abtest uninstall-grafana uninstall-prometheus uninstall-seldon-core uninstall-emissary
 
-minikube:
-	minikube start --driver=docker --kubernetes-version=v1.21.6
-
 train:
+	#python -m spacy download en_core_web_sm
 	python train_models.py
 
+helm-emissary:
+	helm repo add datawire https://app.getambassador.io
+	helm repo update
+
 emissary:
-	kubectl apply -f https://app.getambassador.io/yaml/emissary/3.3.1/emissary-crds.yaml
+	kubectl apply -f https://app.getambassador.io/yaml/emissary/3.6.0/emissary-crds.yaml
 	kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
 	helm upgrade --install --namespace emissary --create-namespace \
          emissary-ingress datawire/emissary-ingress \
@@ -52,7 +54,7 @@ seldon-core:
 prometheus:
 	# helm repo add bitnami https://charts.bitnami.com/bitnami
 	helm upgrade --install prometheus-seldon-monitoring bitnami/kube-prometheus \
-		--version 8.2.2 \
+		--version 8.9.1 \
 		--values ./charts/prometheus/values.prometheus.local.yaml \
 		--namespace seldon-monitoring \
 		--create-namespace
@@ -60,7 +62,7 @@ prometheus:
 grafana:
 	# helm repo add grafana https://grafana.github.io/helm-charts
 	helm upgrade --install grafana-seldon-monitoring grafana/grafana \
-		--version 6.48.0 \
+		--version 6.56.1 \
 		--values ./charts/grafana/values.grafana.local.yaml \
 		--values ./charts/grafana/values.grafana.secret.yaml \
 		--namespace seldon-monitoring \
@@ -72,18 +74,18 @@ podmonitor:
 port-grafana:
 	kubectl port-forward svc/grafana-seldon-monitoring -n seldon-monitoring 3000:80
 
-build:  # gcloud builds
-	docker build -t ab-test:a -f Dockerfile.a .
-	docker build -t ab-test:b -f Dockerfile.b .
-	docker build -t streamlit-app:v1.1 -f Dockerfile.streamlit .
+#build:  # gcloud builds
+#	docker build -t ab-test:a -f Dockerfile.a .
+#	docker build -t ab-test:b -f Dockerfile.b .
+#	docker build -t streamlit-app:v1.1 -f Dockerfile.streamlit .
 
-load:
-	minikube image load ab-test:a
-	minikube image load ab-test:b
-	minikube image load streamlit-app:v1.1
+#load:
+#	minikube image load ab-test:a
+#	minikube image load ab-test:b
+#	minikube image load streamlit-app:v1.1
 
-streamlit-load:
-	minikube image load streamlit-app:v1.1
+#streamlit-load:
+#	minikube image load streamlit-app:v1.1
 
 sleep:
 	sleep 10
@@ -138,9 +140,6 @@ helm-file:
 	helmfile apply --concurrency 1
 
 submit-images:
-	gcloud builds submit --config cloudbuild-modela.yaml
-	gcloud builds submit --config cloudbuild-modelb.yaml
-	gcloud builds submit --config cloudbuild-streamlit.yaml
-
-streamlit-image:
-	gcloud builds submit --config cloudbuild-streamlit.yaml
+	sh build-modela.sh
+	sh build-modelb.sh
+	sh build-streamlit.sh
