@@ -11,20 +11,17 @@ This repository uses Kubernetes, helm, ambassador, seldon-core, and seldon-core-
 ### Install prerequisites
 
 1. Install helm
-```
-brew install helm
-```
+    ```
+    brew install helm
+    ```
 
 2. Create a Kubernetes cluster: AKS, EKS, GKE or local cluster. For local clusters, one can use `minikube`, `kind`, or `k3s`. For instance:
-   1. Minikube
-    ```bash
-    make minikube
-    ```
-   2. GKE
+   1. GKE
    ```shell
     gcloud container clusters create demo-cluster-ab-test \
       --zone=europe-west3-a \
-      --cluster-version=1.21.14-gke.5300 --no-enable-autoupgrade \
+      --disk-size=30GB \
+      --cluster-version=1.24.12-gke.1000 \
       --machine-type=e2-highcpu-4
    ```
 
@@ -40,30 +37,30 @@ One can build the images locally, or use Cloud Submit:
 ```
 docker build -t ab-test:a -f Dockerfile.a .
 docker build -t ab-test:b -f Dockerfile.b .
-docker build -t streamlit-app:v1.1 -f Dockerfile.streamlit .
+docker build -t streamlit-app:v1.0.0 -f Dockerfile.streamlit .
 ```
 
 #### Cloud Submit
 ```shell
-gcloud builds submit --config cloudbuild-modela.yaml
-gcloud builds submit --config cloudbuild-modelb.yaml
-gcloud builds submit --config cloudbuild-streamlit.yaml
-```
-
-### (minikube only) Load models on minikube's registry
-```bash
-make load
+sh build-modela.sh
+sh build-modelb.sh
+sh build-streamlit.sh
 ```
 
 ### Deploy required components
-* ambassador
+* emissary-ingress
 ```bash
-make ambassador
+make emissary
 ```
 
-* seldon-core-analytics
+* Prometheus
 ```bash
-make seldon-core-analytics
+make prometheus
+```
+
+* Grafana
+```bash
+make grafana
 ```
 
 * seldon-core
@@ -74,11 +71,6 @@ make seldon-core
 ### Deployment
 ```bash
 make abtest
-```
-
-### Port-forward ambassador
-```bash
-make port
 ```
 
 ### Port-forward Grafana
