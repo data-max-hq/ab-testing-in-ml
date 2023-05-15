@@ -68,19 +68,24 @@ make grafana
 make seldon-core
 ```
 
+* podmonitor
+```bash
+make podmonitor
+```
+
 ### Deployment
 ```bash
 make abtest
 ```
 
+### Start Streamlit App
+```shell
+make streamlit
+```
+
 ### Port-forward Grafana
 ```bash
 make port-grafana
-```
-
-## Start Streamlit App
-```shell
-make streamlit
 ```
 
 ## Contact
@@ -93,8 +98,8 @@ Developed with ❤ at [Data Max](https://www.data-max.io/)
 
 * Model Training: https://github.com/SeldonIO/seldon-core/tree/master/examples/models/sklearn_spacy_text
 * Seldon-core installation: 
-  * Install Ambassador: https://docs.seldon.io/projects/seldon-core/en/latest/ingress/ambassador.html
+  * Install Emissary Ingress: https://www.getambassador.io/docs/emissary/latest/topics/install
   * Install seldon-core operator: https://docs.seldon.io/projects/seldon-core/en/latest/workflow/install.html
-* Seldon-core-analytics installation: https://docs.seldon.io/projects/seldon-core/en/latest/charts/seldon-core-analytics.html
+* PodMonitor with Prometheus installation: https://docs.seldon.io/projects/seldon-core/en/latest/analytics/analytics.html
 * Custom metrics: https://docs.seldon.io/projects/seldon-core/en/latest/examples/runtime_metrics_tags.html
 * Streamlit: https://docs.streamlit.io/library/cheatsheet
