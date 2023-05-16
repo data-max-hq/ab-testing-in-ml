@@ -88,11 +88,11 @@ uninstall-emissary:
 uninstall-prometheus:
 	helm uninstall prometheus-seldon-monitoring --namespace seldon-monitoring
 
+uninstall-podmonitor:
+	kubectl delete -f seldon-podmonitor.yaml
+
 uninstall-grafana:
 	helm uninstall grafana-seldon-monitoring --namespace seldon-monitoring
-
-delete:
-	minikube delete
 
 helm-diff:
 	helm plugin install https://github.com/databus23/helm-diff
