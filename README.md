@@ -92,7 +92,7 @@ make port-grafana
 
 Sadik Bakiu (sadik [at] data-max.io)
 
-Developed with ❤ at [Data Max](https://www.data-max.io/)
+Developed with ❤ at [Data Max](https://www.datamax.ai/)
 
 ## References
 
